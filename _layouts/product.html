@@ -2,6 +2,7 @@
 layout: default
 ---
 {% assign product = page.product %}
+{% assign cat = site.data.categories | where: "id", product.category | first %}
 
 <main class="product-detail">
 
@@ -18,7 +19,6 @@ layout: default
     <nav class="breadcrumb" aria-label="Breadcrumb">
       <a href="/products/">Products</a>
       <span class="breadcrumb__sep" aria-hidden="true">&rsaquo;</span>
-      {% assign cat = site.data.categories | where: "id", product.category | first %}
       {% if cat %}
       <a href="/products/category/{{ cat.id }}/">{{ cat.name }}</a>
       <span class="breadcrumb__sep" aria-hidden="true">&rsaquo;</span>
@@ -28,6 +28,7 @@ layout: default
 
     <div class="product-detail__layout">
 
+      <!-- Left column: product information -->
       <div class="product-detail__info">
         <h1 class="product-detail__name">{{ product.name }}</h1>
 
@@ -37,7 +38,6 @@ layout: default
           {% else %}
           <span class="badge badge--outofstock">Currently Unavailable</span>
           {% endif %}
-
           {% if product.attributes %}
           {% for attr in product.attributes %}
           <span class="badge badge--attr">{{ attr }}</span>
@@ -65,26 +65,27 @@ layout: default
           {% endfor %}
         </ul>
         {% endif %}
+      </div>
 
+      <!-- Right column: order form (or unavailable message) -->
+      <div class="product-detail__order">
         {% assign inquiry = product.inquiry %}
         {% if product.in_stock and inquiry.enabled %}
-        <div class="product-detail__cta">
-          {% include inquiry-button.html product=product %}
+        <div class="order-form-card">
+          <h2 class="order-form-card__title">Order or Inquire</h2>
+          <p class="order-form-card__note text-muted">
+            Fill out the form and we&rsquo;ll respond with current pricing and availability.
+          </p>
+          {% include order-form.html product=product %}
         </div>
-        {% elsif inquiry.enabled == false or product.in_stock == false %}
-        <p class="product-detail__unavail-msg text-muted">
-          This product is currently unavailable. {% include contact-link.html label="Contact us" %} to be notified when it's back in stock.
-        </p>
+        {% else %}
+        <div class="order-form-card order-form-card--unavail">
+          <h2 class="order-form-card__title">Currently Unavailable</h2>
+          <p>This product isn&rsquo;t available right now.
+          {% include contact-link.html label="Contact us" %} to be notified when it&rsquo;s back in stock.</p>
+        </div>
         {% endif %}
       </div>
-
-      {% if product.gallery.size > 0 %}
-      <div class="product-detail__gallery">
-        {% for img in product.gallery %}
-        <img src="{{ img.src }}" alt="{{ img.alt | default: product.name }}" loading="lazy">
-        {% endfor %}
-      </div>
-      {% endif %}
 
     </div>
 

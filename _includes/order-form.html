@@ -1,0 +1,104 @@
+{% assign product = include.product %}
+{% assign endpoint = site.data.site.ranch.formspree.sales_endpoint %}
+{% assign unit_label = product.inquiry.unit_label | default: product.unit %}
+{% assign quantity_min = product.inquiry.quantity_min | default: 1 %}
+
+<div
+  class="order-form"
+  x-data="orderForm($el.dataset)"
+  data-product-id="{{ product.id }}"
+  data-product-name="{{ product.name | xml_escape }}"
+  data-unit-label="{{ unit_label | xml_escape }}"
+  data-quantity-min="{{ quantity_min }}"
+  data-endpoint-id="{{ endpoint }}"
+>
+
+  <div x-show="state === 'success'" class="form-feedback form-feedback--success" role="alert">
+    <strong>Inquiry sent!</strong> We&rsquo;ll be in touch at the email you provided.
+  </div>
+
+  <form x-show="state !== 'success'" x-cloak @submit.prevent="submit" novalidate>
+
+    <!-- Formspree honeypot — must stay empty -->
+    <input type="text" name="_gotcha" x-model="formData._gotcha"
+           class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+    <div class="form-row form-row--2col">
+      <div class="form-group">
+        <label for="order-name-{{ product.id }}">
+          Your Name <span class="form-required" aria-label="required">*</span>
+        </label>
+        <input type="text" id="order-name-{{ product.id }}" name="name"
+               x-model="formData.name" @focus="trackStart"
+               required autocomplete="name" placeholder="Jane Smith">
+      </div>
+      <div class="form-group">
+        <label for="order-email-{{ product.id }}">
+          Email <span class="form-required" aria-label="required">*</span>
+        </label>
+        <input type="email" id="order-email-{{ product.id }}" name="email"
+               x-model="formData.email" @focus="trackStart"
+               required autocomplete="email" placeholder="you@example.com">
+      </div>
+    </div>
+
+    <div class="form-row form-row--2col">
+      <div class="form-group">
+        <label for="order-phone-{{ product.id }}">
+          Phone <span class="form-optional">(optional)</span>
+        </label>
+        <input type="tel" id="order-phone-{{ product.id }}" name="phone"
+               x-model="formData.phone" @focus="trackStart"
+               autocomplete="tel" placeholder="(307) 555-0100">
+      </div>
+      <div class="form-group">
+        <label for="order-qty-{{ product.id }}">
+          Quantity ({{ unit_label }}) <span class="form-required" aria-label="required">*</span>
+        </label>
+        <input type="number" id="order-qty-{{ product.id }}" name="quantity"
+               x-model.number="formData.quantity" @focus="trackStart"
+               min="{{ quantity_min }}" required>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="order-delivery-{{ product.id }}">Pickup or Delivery?</label>
+      <select id="order-delivery-{{ product.id }}" name="delivery_preference"
+              x-model="formData.delivery_preference" @focus="trackStart">
+        <option value="pickup">Pickup at the ranch (Basin, WY)</option>
+        <option value="delivery">Delivery — contact me to discuss</option>
+        <option value="unsure">Not sure yet</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="order-msg-{{ product.id }}">Notes or Questions</label>
+      <textarea id="order-msg-{{ product.id }}" name="message"
+                x-model="formData.message" @focus="trackStart"
+                rows="3"
+                placeholder="Preferred pickup week, forage analysis request, delivery details, etc."></textarea>
+    </div>
+
+    <!-- Hidden context fields -->
+    <input type="hidden" name="product_id"   x-model="formData.product_id">
+    <input type="hidden" name="product_name" x-model="formData.product_name">
+    <input type="hidden" name="_subject"     x-model="formData._subject">
+
+    <div x-show="state === 'error'" x-cloak
+         class="form-feedback form-feedback--error" role="alert"
+         x-text="errorMessage"></div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary btn--submit"
+              :disabled="state === 'submitting'">
+        <span x-show="state !== 'submitting'">Send Inquiry</span>
+        <span x-show="state === 'submitting'" x-cloak aria-live="polite">Sending&hellip;</span>
+      </button>
+      <p class="form-note text-muted">
+        Used only to respond to your inquiry.
+        See our <a href="/privacy/">privacy policy</a>.
+      </p>
+    </div>
+
+  </form>
+</div>

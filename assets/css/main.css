@@ -921,6 +921,152 @@ select {
   padding-block: 2.5rem;
 }
 
+/* ── Form enhancements (Phase 3) ─────────────────────────────────────────── */
+.form-required {
+  color: #b33a2c;
+  margin-left: 0.1em;
+}
+
+.form-optional {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--color-text-muted);
+  margin-left: 0.25em;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0 1rem;
+}
+
+@media (min-width: 480px) {
+  .form-row--2col {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.form-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.btn--submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.form-note {
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+.form-feedback {
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+  font-size: 0.93rem;
+  margin-block: 0.75rem;
+}
+
+.form-feedback--success {
+  background-color: #e4f5ea;
+  color: #1f5730;
+  border: 1px solid #b8dfc4;
+}
+
+.form-feedback--error {
+  background-color: #fdf0ef;
+  color: #8b2218;
+  border: 1px solid #f5c6c2;
+}
+
+/* ── Order Form Card (on product detail pages) ────────────────────────────── */
+.product-detail__order {
+  display: flex;
+  flex-direction: column;
+}
+
+.order-form-card {
+  background: var(--color-bg-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+}
+
+.order-form-card--unavail {
+  padding: 1.5rem;
+  color: var(--color-text-muted);
+}
+
+.order-form-card__title {
+  font-size: 1.2rem;
+  margin-top: 0;
+  margin-bottom: 0.35rem;
+}
+
+.order-form-card__note {
+  font-size: 0.88rem;
+  margin-bottom: 1.25rem;
+}
+
+/* Override form input backgrounds inside the card to white */
+.order-form-card input,
+.order-form-card select,
+.order-form-card textarea {
+  background-color: #fff;
+}
+
+/* ── Contact Page ─────────────────────────────────────────────────────────── */
+.contact-page__layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  padding-block: 1.5rem;
+}
+
+@media (min-width: 700px) {
+  .contact-page__layout {
+    grid-template-columns: 1fr 2fr;
+    gap: 3rem;
+  }
+}
+
+.contact-page__info-heading,
+.contact-page__form-heading {
+  font-size: 1.25rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.contact-info-list {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.4rem 1rem;
+  margin: 0 0 1.5rem;
+  font-size: 0.93rem;
+}
+
+.contact-info-list dt {
+  font-weight: 600;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.contact-info-list dd {
+  margin: 0;
+}
+
+.contact-page__order-note {
+  font-size: 0.88rem;
+  padding: 0.75rem 1rem;
+  background: var(--color-bg-alt);
+  border-left: 3px solid var(--color-gold);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
 /* ── 404 page ─────────────────────────────────────────────────────────────── */
 .not-found {
   flex: 1;

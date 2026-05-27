@@ -1,0 +1,55 @@
+---
+layout: page
+title: Contact
+permalink: /contact/
+description: "Get in touch with Heritage Harvest Ranch in Basin, Wyoming. We're happy to answer questions about our alfalfa hay and other products."
+---
+
+<div class="contact-page">
+
+  <div class="contact-page__layout">
+
+    <div class="contact-page__info">
+      <h2 class="contact-page__info-heading">Ranch Information</h2>
+
+      <dl class="contact-info-list">
+        <dt>Location</dt>
+        <dd>Basin, Wyoming &mdash; Big Horn County</dd>
+
+        <dt>Sales &amp; Orders</dt>
+        <dd>
+          <a href="mailto:{{ site.data.site.ranch.contact.sales_email }}">
+            {{ site.data.site.ranch.contact.sales_email }}
+          </a>
+        </dd>
+
+        <dt>General Inquiries</dt>
+        <dd>
+          <a href="mailto:{{ site.data.site.ranch.contact.info_email }}">
+            {{ site.data.site.ranch.contact.info_email }}
+          </a>
+        </dd>
+
+        <dt>Hours</dt>
+        <dd>{{ site.data.site.ranch.hours.note }}</dd>
+      </dl>
+
+      <p class="contact-page__order-note">
+        <strong>Ordering hay?</strong> Use the inquiry form on the
+        <a href="/products/">product pages</a> — it routes directly
+        to our sales inbox with the product context pre-filled.
+      </p>
+    </div>
+
+    <div class="contact-page__form">
+      <h2 class="contact-page__form-heading">Send a Message</h2>
+      <p class="text-muted" style="margin-bottom: 1.5rem; font-size: 0.92rem;">
+        General questions, directions, or anything else &mdash; use this form
+        and we&rsquo;ll respond by email.
+      </p>
+      {% include contact-form.html %}
+    </div>
+
+  </div>
+
+</div>

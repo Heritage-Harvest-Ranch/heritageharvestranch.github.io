@@ -21,6 +21,10 @@
 
 <link rel="stylesheet" href="{{ '/assets/css/main.css' | prepend: site.baseurl }}">
 
+<!-- Form components (must load before Alpine initialises) -->
+<script defer src="{{ '/assets/js/order-form.js' | prepend: site.baseurl }}"></script>
+<script defer src="{{ '/assets/js/contact-form.js' | prepend: site.baseurl }}"></script>
+
 <!-- Alpine.js -->
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
