@@ -1,0 +1,134 @@
+---
+layout: default
+---
+{% assign product = page.product %}
+
+<main class="product-detail">
+
+  {% if product.image %}
+  <div class="product-hero">
+    <img src="{{ product.image }}"
+         alt="{{ product.image_alt | default: product.name }}"
+         class="product-hero__img">
+  </div>
+  {% endif %}
+
+  <div class="container">
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/products/">Products</a>
+      <span class="breadcrumb__sep" aria-hidden="true">&rsaquo;</span>
+      {% assign cat = site.data.categories | where: "id", product.category | first %}
+      {% if cat %}
+      <a href="/products/category/{{ cat.id }}/">{{ cat.name }}</a>
+      <span class="breadcrumb__sep" aria-hidden="true">&rsaquo;</span>
+      {% endif %}
+      <span aria-current="page">{{ product.name }}</span>
+    </nav>
+
+    <div class="product-detail__layout">
+
+      <div class="product-detail__info">
+        <h1 class="product-detail__name">{{ product.name }}</h1>
+
+        <div class="product-detail__badges">
+          {% if product.in_stock %}
+          <span class="badge badge--instock">In Stock</span>
+          {% else %}
+          <span class="badge badge--outofstock">Currently Unavailable</span>
+          {% endif %}
+
+          {% if product.attributes %}
+          {% for attr in product.attributes %}
+          <span class="badge badge--attr">{{ attr }}</span>
+          {% endfor %}
+          {% endif %}
+        </div>
+
+        <div class="product-detail__pricing">
+          {% if product.price_per_unit %}
+          <span class="product-detail__price">${{ product.price_per_unit }} / {{ product.unit }}</span>
+          {% elsif product.pricing_note %}
+          <p class="product-detail__price-note">{{ product.pricing_note }}</p>
+          {% endif %}
+          {% if product.availability_note %}
+          <p class="product-detail__avail">{{ product.availability_note }}</p>
+          {% endif %}
+        </div>
+
+        <p class="product-detail__short-desc">{{ product.short_description }}</p>
+
+        {% if product.highlights %}
+        <ul class="product-highlights">
+          {% for highlight in product.highlights %}
+          <li>{{ highlight }}</li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+
+        {% assign inquiry = product.inquiry %}
+        {% if product.in_stock and inquiry.enabled %}
+        <div class="product-detail__cta">
+          {% include inquiry-button.html product=product %}
+        </div>
+        {% elsif inquiry.enabled == false or product.in_stock == false %}
+        <p class="product-detail__unavail-msg text-muted">
+          This product is currently unavailable. {% include contact-link.html label="Contact us" %} to be notified when it's back in stock.
+        </p>
+        {% endif %}
+      </div>
+
+      {% if product.gallery.size > 0 %}
+      <div class="product-detail__gallery">
+        {% for img in product.gallery %}
+        <img src="{{ img.src }}" alt="{{ img.alt | default: product.name }}" loading="lazy">
+        {% endfor %}
+      </div>
+      {% endif %}
+
+    </div>
+
+    {% if product.detail %}
+    <div class="product-detail__content prose">
+      {{ product.detail | markdownify }}
+    </div>
+    {% endif %}
+
+    {% assign related = site.data.all_products | where: "category", product.category | where_exp: "p", "p.id != product.id" %}
+    {% if related.size > 0 %}
+    <aside class="product-related">
+      <h2 class="product-related__title">More from {{ cat.name | default: "This Category" }}</h2>
+      <div class="product-grid product-grid--compact">
+        {% for rel in related %}
+        {% include product-card.html product=rel %}
+        {% endfor %}
+      </div>
+    </aside>
+    {% endif %}
+
+  </div>
+</main>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "Product",
+  "name": {{ product.name | jsonify }},
+  "description": {{ product.short_description | jsonify }},
+  {% if product.image %}"image": {{ product.image | prepend: site.url | jsonify }},{% endif %}
+  "brand": {
+    "@type": "Brand",
+    "name": {{ site.data.site.ranch.name | jsonify }}
+  },
+  "offers": {
+    "@type": "Offer",
+    {% if product.price_per_unit %}"price": "{{ product.price_per_unit }}",
+    "priceCurrency": {{ product.pricing_currency | default: "USD" | jsonify }},{% endif %}
+    "availability": "{% if product.in_stock %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
+    "seller": {
+      "@type": "Organization",
+      "name": {{ site.data.site.ranch.name | jsonify }}
+    }
+  }
+}
+</script>

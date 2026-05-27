@@ -1,0 +1,44 @@
+{% assign product = include.product %}
+<article class="product-card">
+  <a href="/products/{{ product.id }}/" class="product-card__image-link" tabindex="-1" aria-hidden="true">
+    {% if product.image %}
+    <div class="product-card__image">
+      <img src="{{ product.image }}" alt="{{ product.image_alt | default: product.name }}" loading="lazy">
+    </div>
+    {% else %}
+    <div class="product-card__image product-card__image--placeholder">
+      <span class="product-card__placeholder-text">{{ product.name }}</span>
+    </div>
+    {% endif %}
+  </a>
+
+  <div class="product-card__body">
+    <h3 class="product-card__name">
+      <a href="/products/{{ product.id }}/">{{ product.name }}</a>
+    </h3>
+
+    <div class="product-card__meta">
+      {% if product.in_stock %}
+      <span class="badge badge--instock">In Stock</span>
+      {% else %}
+      <span class="badge badge--outofstock">Unavailable</span>
+      {% endif %}
+
+      {% if product.seasonal and product.availability_note %}
+      <span class="product-card__avail">{{ product.availability_note }}</span>
+      {% endif %}
+    </div>
+
+    <p class="product-card__desc">{{ product.short_description }}</p>
+
+    <div class="product-card__pricing">
+      {% if product.price_per_unit %}
+      <span class="product-card__price">${{ product.price_per_unit }} / {{ product.unit }}</span>
+      {% elsif product.pricing_note %}
+      <span class="product-card__price-note">{{ product.pricing_note }}</span>
+      {% endif %}
+    </div>
+
+    <a href="/products/{{ product.id }}/" class="btn btn-secondary product-card__cta">View / Order</a>
+  </div>
+</article>
