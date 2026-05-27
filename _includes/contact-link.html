@@ -1,0 +1,3 @@
+{% assign email = include.email | default: site.data.site.ranch.contact.info_email %}
+{% assign label = include.label | default: email %}
+<a href="mailto:{{ email }}" class="{{ include.class | default: 'contact-link' }}">{{ label }}</a>

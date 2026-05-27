@@ -1,0 +1,25 @@
+{% assign product = include.product %}
+{% assign sales_email = site.data.site.ranch.contact.sales_email %}
+{% if product.inquiry.subject_line != blank %}
+  {% assign subject = product.inquiry.subject_line %}
+{% else %}
+  {% capture subject %}Order Inquiry: {{ product.name }}{% endcapture %}
+{% endif %}
+{% assign unit_label = product.inquiry.unit_label | default: product.unit %}
+{% capture email_body %}Hello,
+
+I am interested in ordering {{ product.name }}.
+
+Product: {{ product.name }}
+Quantity ({{ unit_label }}): [enter quantity]
+{% for prompt in product.inquiry.extra_prompts %}{{ prompt }}: [your answer]
+{% endfor %}
+My name: [your name]
+My phone (optional): [your phone]
+
+Thank you{% endcapture %}
+<a href="mailto:{{ sales_email }}?subject={{ subject | url_encode }}&body={{ email_body | url_encode }}"
+   class="btn btn-primary btn--inquiry"
+   aria-label="Email to order or inquire about {{ product.name }}">
+  Email to Order / Inquire
+</a>

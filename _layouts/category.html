@@ -1,0 +1,44 @@
+---
+layout: default
+---
+{% assign category = page.category %}
+
+<main class="category-page">
+
+  {% if category.hero_image %}
+  <div class="hero" style="background-image: url('{{ category.hero_image }}')">
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <h1 class="hero__title">{{ category.name }}</h1>
+      {% if category.description %}
+      <p class="hero__subtitle">{{ category.description }}</p>
+      {% endif %}
+    </div>
+  </div>
+  {% else %}
+  <div class="page-content">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/products/">Products</a>
+        <span class="breadcrumb__sep" aria-hidden="true">&rsaquo;</span>
+        <span aria-current="page">{{ category.name }}</span>
+      </nav>
+      <h1 class="page-title">{{ category.name }}</h1>
+      {% if category.description %}<p>{{ category.description }}</p>{% endif %}
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="container category-page__products">
+    {% if page.category_products.size > 0 %}
+    <div class="product-grid">
+      {% for product in page.category_products %}
+      {% include product-card.html product=product %}
+      {% endfor %}
+    </div>
+    {% else %}
+    <p class="text-muted">No products in this category yet. Check back soon.</p>
+    {% endif %}
+  </div>
+
+</main>

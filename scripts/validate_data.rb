@@ -2,7 +2,17 @@
 # validate_data.rb — validates product and category data files before build
 
 require "yaml"
+require "date"
 require "pathname"
+
+YAML_LOAD_OPTS = { permitted_classes: [Date, Time, Symbol] }.freeze
+
+def safe_yaml_load(path)
+  YAML.safe_load(File.read(path), **YAML_LOAD_OPTS)
+rescue ArgumentError
+  # Ruby < 3.1 doesn't support permitted_classes keyword; fall back
+  YAML.load_file(path)
+end
 
 ROOT = Pathname.new(File.expand_path("../../", __FILE__))
 DATA_DIR = ROOT / "_data"
@@ -16,7 +26,7 @@ warnings = []
 valid_category_ids = []
 
 if CATEGORIES_FILE.exist?
-  categories = YAML.load_file(CATEGORIES_FILE)
+  categories = safe_yaml_load(CATEGORIES_FILE)
   if categories.is_a?(Array)
     valid_category_ids = categories.map { |c| c["id"] }.compact
   elsif categories.is_a?(Hash)
@@ -46,7 +56,7 @@ if product_files.empty?
 end
 
 product_files.each do |file|
-  raw = YAML.load_file(file)
+  raw = safe_yaml_load(file)
   products = raw.is_a?(Array) ? raw : [raw]
   products.each { |p| all_products << { product: p, file: file } }
 end

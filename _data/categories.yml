@@ -1,0 +1,5 @@
+- id: hay
+  name: Hay & Forage
+  description: "Pivot-irrigated alfalfa from the Big Horn Basin, grown under Wyoming senior water rights."
+  hero_image: /assets/images/categories/hay-hero.jpg
+  display_order: 10

@@ -1,0 +1,109 @@
+- id: alfalfa-round-bale
+  name: Alfalfa Round Bales
+  category: hay
+  short_description: "Pivot-irrigated alfalfa in 4x6 round bales, suited for cattle and larger horse operations."
+  unit: bale
+  approx_weight_lbs: 1100
+
+  price_per_unit: null
+  pricing_note: "Contact for current season pricing"
+  pricing_currency: USD
+
+  in_stock: true
+  availability_note: "First cutting available mid-June through July"
+  seasonal: true
+  season_months: [6, 7, 8, 9, 10]
+
+  image: /assets/images/products/alfalfa-round-bale.jpg
+  image_alt: "Round bales of alfalfa hay in a field"
+  gallery: []
+
+  highlights:
+    - "Established 2024 stand, irrigated by 7-tower center pivot"
+    - "Cured and baled on-site in Basin, Wyoming"
+    - "4x6 net-wrapped round bales, approx. 1,100 lbs"
+    - "Forage analysis available on request"
+
+  detail: |
+    Our alfalfa is grown on pivot-irrigated ground in the Big Horn Basin
+    under Wyoming senior water rights. Round bales suit cattle operations,
+    larger horse operations, and commercial buyers who can handle and store
+    them efficiently.
+
+    Pickup at the ranch in Basin. Buyers are responsible for loading
+    equipment (bale spear or grapple). Delivery may be available for larger
+    orders within Big Horn County — contact us to discuss arrangements.
+
+  attributes:
+    - "Wyoming-grown"
+    - "Pivot-irrigated"
+
+  inquiry:
+    enabled: true
+    unit_label: "bales"
+    subject_line: "Order Inquiry: Alfalfa Round Bales"
+    extra_prompts:
+      - "Pickup or delivery?"
+      - "Preferred pickup date or week?"
+
+  shopify:
+    product_id: null
+    variant_id: null
+    buy_button_html: null
+
+  last_updated: "2026-05-27"
+  display_order: 10
+
+- id: alfalfa-small-square-bale
+  name: Alfalfa Small Square Bales
+  category: hay
+  short_description: "Premium irrigated alfalfa in small square bales — easy to handle for horses and small operations."
+  unit: bale
+  approx_weight_lbs: 65
+
+  price_per_unit: null
+  pricing_note: "Contact for current season pricing"
+  pricing_currency: USD
+
+  in_stock: true
+  availability_note: "Available during hay season, June through September"
+  seasonal: true
+  season_months: [6, 7, 8, 9]
+
+  image: /assets/images/products/alfalfa-small-square-bale.jpg
+  image_alt: "Small square alfalfa bales stacked neatly"
+  gallery: []
+
+  highlights:
+    - "Same high-quality pivot-irrigated alfalfa as our round bales"
+    - "Horse-friendly size — approx. 65 lbs per bale"
+    - "Available by the truckload or by the pallet"
+    - "Forage analysis available on request"
+
+  detail: |
+    Small square bales from the same irrigated alfalfa stand as our round
+    bales. If you manage horses or a smaller operation where handling a
+    1,100-lb round bale isn't practical, the small square is your option.
+
+    Pickup at the ranch in Basin. Orders by truckload or pallet — contact
+    us for minimum quantities and current availability.
+
+  attributes:
+    - "Wyoming-grown"
+    - "Pivot-irrigated"
+
+  inquiry:
+    enabled: true
+    unit_label: "bales"
+    subject_line: "Order Inquiry: Alfalfa Small Square Bales"
+    extra_prompts:
+      - "Approximate quantity needed?"
+      - "Pickup or delivery?"
+
+  shopify:
+    product_id: null
+    variant_id: null
+    buy_button_html: null
+
+  last_updated: "2026-05-27"
+  display_order: 20

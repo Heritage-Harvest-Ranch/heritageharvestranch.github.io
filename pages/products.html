@@ -1,0 +1,44 @@
+---
+layout: default
+title: Products
+description: "Browse alfalfa hay and ranch products from Heritage Harvest Ranch in Basin, Wyoming."
+permalink: /products/
+---
+<main class="products-listing page-content">
+  <div class="container">
+
+    <h1 class="page-title">Products</h1>
+    <p class="products-listing__intro">
+      Hay and forage grown on pivot-irrigated ground in the Big Horn Basin.
+      Pricing varies by season — contact us for current availability and quotes.
+    </p>
+
+    {% if site.data.categories %}
+    {% for category in site.data.categories %}
+    {% assign cat_products = site.data.all_products | where: "category", category.id %}
+    {% if cat_products.size > 0 %}
+    <section class="category-section">
+      <div class="category-section__header">
+        <h2 class="category-section__title">{{ category.name }}</h2>
+        {% if category.description %}
+        <p class="category-section__desc">{{ category.description }}</p>
+        {% endif %}
+        <a href="/products/category/{{ category.id }}/" class="category-section__link">
+          View all {{ category.name }} &rarr;
+        </a>
+      </div>
+
+      <div class="product-grid">
+        {% for product in cat_products %}
+        {% include product-card.html product=product %}
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+    {% endfor %}
+    {% else %}
+    <p class="text-muted">No products yet. Check back soon.</p>
+    {% endif %}
+
+  </div>
+</main>
