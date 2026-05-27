@@ -1,0 +1,36 @@
+<footer class="site-footer">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <strong class="footer__name">{{ site.data.site.ranch.name }}</strong>
+      <p class="footer__location">
+        {{ site.data.site.ranch.location.city }}, {{ site.data.site.ranch.location.state }}&nbsp;&mdash;&nbsp;{{ site.data.site.ranch.location.county }}
+      </p>
+      <p class="footer__hours">{{ site.data.site.ranch.hours.note }}</p>
+    </div>
+
+    <div class="footer__contact">
+      <p class="footer__contact-heading">Get in Touch</p>
+      <p>
+        <a href="mailto:{{ site.data.site.ranch.contact.sales_email }}" class="footer__link">
+          {{ site.data.site.ranch.contact.sales_email }}
+        </a>
+        <span class="footer__contact-label">(Sales &amp; Orders)</span>
+      </p>
+      <p>
+        <a href="mailto:{{ site.data.site.ranch.contact.info_email }}" class="footer__link">
+          {{ site.data.site.ranch.contact.info_email }}
+        </a>
+        <span class="footer__contact-label">(General Inquiries)</span>
+      </p>
+    </div>
+
+    <div class="footer__legal">
+      <p class="footer__copy">&copy; {{ site.time | date: '%Y' }} {{ site.data.site.ranch.name }}. All rights reserved.</p>
+      <nav class="footer__legal-links" aria-label="Legal">
+        <a href="{{ '/terms/' | prepend: site.baseurl }}" class="footer__link">Terms of Use</a>
+        <span aria-hidden="true">&middot;</span>
+        <a href="{{ '/privacy/' | prepend: site.baseurl }}" class="footer__link">Privacy Policy</a>
+      </nav>
+    </div>
+  </div>
+</footer>

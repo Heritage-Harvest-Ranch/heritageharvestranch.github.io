@@ -1,0 +1,21 @@
+ranch:
+  name: Heritage Harvest Ranch
+  tagline: "Premium alfalfa hay from the Big Horn Basin"
+  location:
+    city: Basin
+    state: WY
+    county: Big Horn County
+  contact:
+    sales_email: sales@heritageharvestranch.com
+    info_email: info@heritageharvestranch.com
+    phone: ""
+  hours:
+    note: "By appointment. Call or email to schedule pickup."
+  social:
+    facebook: ""
+    instagram: ""
+  formspree:
+    sales_endpoint: "mkoepevw"
+    contact_endpoint: "xkoepeqw"
+  analytics:
+    ga4_id: "G-XXXXXXXXXX"

@@ -1,0 +1,35 @@
+title: Heritage Harvest Ranch
+description: "Premium alfalfa hay and ranch products from the Big Horn Basin, Basin, Wyoming."
+url: "https://heritageharvestranch.github.io"
+baseurl: ""
+
+# Build
+markdown: kramdown
+highlighter: rouge
+permalink: pretty
+timezone: America/Denver
+
+# Plugins
+plugins:
+  - jekyll-sitemap
+
+# Exclude from build
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - scripts/
+  - docs/
+  - node_modules/
+  - vendor/
+
+# Collections (for future expansion)
+collections:
+  products:
+    output: false
+
+# Default front matter
+defaults:
+  - scope:
+      path: "pages"
+    values:
+      layout: page
